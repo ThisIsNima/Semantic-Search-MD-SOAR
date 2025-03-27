@@ -23,23 +23,17 @@ pip install -e .
 
 ## 📆 Running the App
 
-Make sure you have the `vectors.csv` file ready (contains `filename` and `vector` columns).
+Make sure you have the `vectors.csv` and "output.csv" files
+(see https://umd.app.box.com/folder/313765372458).
 
-1) Place the "vectors.csv" file in the project root.
+1) Download the "vectors.csv" and "output.csv" files from
+   <https://umd.app.box.com/folder/313765372458> and place in
+   the project root.
 
-2) In "src/vector_search_app.py", change the line:
+   **Note:** If different file names are used, change the `VECTOR_CSV` and
+   `OUTPUT_CSV` variables in "src/vector_search_app.py".
 
-```
-VECTOR_CSV = ""
-```
-
-to
-
-```
-VECTOR_CSV = "vectors.csv"
-```
-
-3) Run the server:
+2) Run the server:
 
 ```
 python src/vector_search_app
@@ -62,13 +56,21 @@ python src/vector_search_app
 ```json
 [
   {
-    "filename": "Climate_Change_Report.pdf",
-    "confidence": 0.8765
+    "confidence": 0.7277,
+    "filename": "Episode_5__The_Social_Science_of_the_Climate_Crisis_with_Dr._Tracey_Osborne.pdf.txt",
+    "item_uuid": null
   },
   {
-    "filename": "Environmental_Policy_Summary.pdf",
-    "confidence": 0.8491
-  }
+    "confidence": 0.7258,
+    "filename": "Cities_worldwide_aren't_adapting_to_climate_change_quickly_enough.pdf.txt",
+    "item_uuid": "2832c6fe-a51c-40ea-aee1-100d750daf35"
+  },
+  {
+    "confidence": 0.6806,
+    "filename": "Hybrid_Causality_Analysis_of_ENSO\u2019s_Global_Impacts_on_Climate_Variables_Based_on_Data-Driven_Analytics_and_Climate_Model_Simulation.pdf.txt",
+    "item_uuid": "f7c0e645-cab0-4ac4-816a-b49dc2438d92"
+  },
+  ...
 ]
 ```
 

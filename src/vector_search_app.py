@@ -7,7 +7,9 @@ from scipy.spatial.distance import cosine
 from flask_cors import CORS  # Enables Cross-Origin Resource Sharing for frontend access
 
 # === Configuration ===
-VECTOR_CSV = ""  # Path to your CSV with filename-vector pairs
+VECTOR_CSV = "vectors.csv"  # Path to your CSV with filename-vector pairs
+OUTPUT_CSV = "output.csv"
+
 MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"  # Pretrained embedding model
 
 # === Initialize Flask App ===
@@ -17,9 +19,20 @@ CORS(app, supports_credentials=True)  # Allow requests from frontend (e.g., Angu
 # === Load the Sentence Transformer Model ===
 model = SentenceTransformer(MODEL_NAME)
 
+
+# === Normalize helper ===
+def normalize(text):
+    return text.strip().lower()
+
 # === Load and Prepare Vector Data ===
 df = pd.read_csv(VECTOR_CSV)
 df["vector"] = df["vector"].apply(lambda x: json.loads(x))  # Convert stored JSON strings to Python lists
+df["filename_normalized"] = df["filename"].apply(normalize)
+
+# === Load UUID mapping from output.csv ===
+uuid_df = pd.read_csv(OUTPUT_CSV)
+uuid_df["title_normalized"] = uuid_df["title"].apply(normalize)
+title_to_uuid = dict(zip(uuid_df["title_normalized"], uuid_df["item_uuid"]))
 
 # === Function for Cosine Similarity Search (for longer queries) ===
 def find_closest_matches(query, top_n=5):
@@ -71,8 +84,26 @@ def search():
     else:
         results = hybrid_search(query)
 
-    # Build response JSON with filenames and confidence scores
-    response = [{"filename": filename, "confidence": round(score, 4)} for filename, score in results]
+
+    # Enrich with item_uuid using normalized matching and fallback with underscores replaced by spaces
+    response = []
+
+    for filename, score in results:
+        normalized_filename = normalize(filename)
+        item_uuid = title_to_uuid.get(normalized_filename)
+
+        if item_uuid is None:
+            # Try again with underscores replaced by spaces
+            alt_filename = filename.replace("_", " ")
+            normalized_alt = normalize(alt_filename)
+            item_uuid = title_to_uuid.get(normalized_alt)
+
+        response.append({
+            "filename": filename,
+            "confidence": round(score, 4),
+            "item_uuid": item_uuid
+        })
+
     return jsonify(response)
 
 # === Run the App Locally ===
