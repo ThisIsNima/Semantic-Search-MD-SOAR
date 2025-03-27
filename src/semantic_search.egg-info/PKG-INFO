@@ -1,0 +1,7 @@
+Metadata-Version: 2.4
+Name: semantic-search
+Version: 1.0.0
+Requires-Dist: pandas
+Requires-Dist: flask
+Requires-Dist: flask_cors
+Requires-Dist: sentence_transformers

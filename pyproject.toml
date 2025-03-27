@@ -1,0 +1,9 @@
+[project]
+name = "semantic-search"
+version = "1.0.0"
+dependencies = [
+  "pandas==2.2.3",
+  "flask==3.1.0",
+  "flask_cor==5.0.1",
+  "sentence_transformers==4.0.1"
+]

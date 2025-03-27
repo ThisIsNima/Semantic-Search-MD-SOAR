@@ -1,0 +1,5 @@
+OCR
+PDF_vectorize
+query_vector
+text_vectorize
+vector_search_app

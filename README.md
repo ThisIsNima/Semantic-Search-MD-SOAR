@@ -13,20 +13,42 @@ This project provides a semantic search API for the [MD-SOAR](https://mdsoar.org
 ---
 ## 🧠 Requirements
 
-- Python 3.7+
-- Necessary pip packages
+- Python 3.12+
+- Necessary pip packages:
+
+```
+pip install -e .
+```
 
 
 ## 📆 Running the App
 
 Make sure you have the `vectors.csv` file ready (contains `filename` and `vector` columns).
 
+1) Place the "vectors.csv" file in the project root.
 
+2) In "src/vector_search_app.py", change the line:
+
+```
+VECTOR_CSV = ""
+```
+
+to
+
+```
+VECTOR_CSV = "vectors.csv"
+```
+
+3) Run the server:
+
+```
+python src/vector_search_app
+```
 
 ## 🔍 API Usage
 
-### Endpoint: `/search`  
-**Method:** `POST`  
+### Endpoint: `/search`
+**Method:** `POST`
 **Content-Type:** `application/json`
 
 ### Request Body:

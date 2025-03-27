@@ -1,0 +1,12 @@
+README.md
+pyproject.toml
+src/OCR.py
+src/PDF_vectorize.py
+src/query_vector.py
+src/text_vectorize.py
+src/vector_search_app.py
+src/semantic_search.egg-info/PKG-INFO
+src/semantic_search.egg-info/SOURCES.txt
+src/semantic_search.egg-info/dependency_links.txt
+src/semantic_search.egg-info/requires.txt
+src/semantic_search.egg-info/top_level.txt
