@@ -12,7 +12,7 @@ MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"  # Pretrained embedding mo
 
 # === Initialize Flask App ===
 app = Flask(__name__)
-CORS(app)  # Allow requests from frontend (e.g., Angular)
+CORS(app, supports_credentials=True)  # Allow requests from frontend (e.g., Angular)
 
 # === Load the Sentence Transformer Model ===
 model = SentenceTransformer(MODEL_NAME)
