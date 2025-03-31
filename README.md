@@ -36,7 +36,7 @@ Make sure you have the `vectors.csv` and "output.csv" files
 2) Run the server:
 
 ```
-python src/vector_search_app
+python src/vector_search_app.py
 ```
 
 ## 🔍 API Usage
