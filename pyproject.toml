@@ -1,0 +1,12 @@
+[project]
+name = "semantic-search-md-soar"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12.0"
+dependencies = [
+    "fastmcp>=2.13.3",
+    "numpy>=2.3.5",
+    "pandas>=2.3.3",
+    "sentence-transformers>=5.1.2",
+]
